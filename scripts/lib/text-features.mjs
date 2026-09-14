@@ -79,18 +79,15 @@ export function extractFeatures(title, excerpt) {
   }
 
   const collect = (table, polarity) => {
-    let weight = 0
-    const out = {}
+    const counts = {}
     const hits = []
-    for (const [name, re, w] of table) {
+    for (const [name, re] of table) {
       const m = text.match(re)
       if (!m?.length) continue
-      const capped = Math.min(m.length, 6)
-      weight += w * capped
-      out[name] = m.length
+      counts[name] = m.length
       hits.push({ polarity, name, count: m.length, sample: (m[0].length > 24 ? m[0].slice(0, 24) + '…' : m[0]).replace(/\s+/g, ' ') })
     }
-    return { weight, counts: out, hits }
+    return { counts, hits }
   }
 
   const pos = collect(POSITIVE, 'positive')

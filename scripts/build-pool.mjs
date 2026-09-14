@@ -148,6 +148,7 @@ async function scoreOne(prompt, card) {
       const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null)
       const scores = {
         human: num(parsed.human),
+        evergreen: num(parsed.evergreen),
         accessible: num(parsed.accessible),
         takeaway: num(parsed.takeaway),
         note: typeof parsed.note === 'string' ? parsed.note.slice(0, 200) : '',
@@ -239,11 +240,7 @@ const prompt = await readFile(promptFile, 'utf8')
 const promptHash = createHash('sha1').update(prompt).digest('hex').slice(0, 12)
 let scores = {}
 try {
-  const cached = JSON.parse(await readFile(scoreFile, 'utf8'))
-  for (const [id, entry] of Object.entries(cached.scores ?? {})) {
-    // v1 stored the model scores at the top level of the entry.
-    scores[id] = entry.llm || typeof entry.human === 'number' ? { llm: entry.llm ?? entry, features: entry.features ?? null } : entry
-  }
+  scores = JSON.parse(await readFile(scoreFile, 'utf8')).scores ?? {}
 } catch {
   /* first run */
 }
@@ -305,22 +302,20 @@ if (!POOL_KEEP_ALL) {
   const minAccessible = Number(POOL_MIN_ACCESSIBLE)
   const minTakeaway = Number(POOL_MIN_TAKEAWAY)
   const before = cards.length
-  let keptUnmeasurable = 0
-  kept = cards.filter((c) => {
+  // A card the rule layer cannot read is decided by the model; with no model
+  // there is no evidence against it, so it stays. Short and code-heavy excerpts
+  // are not filtered out for being short or code-heavy.
+  const verdict = (c) => {
     const f = scores[c.id].final
-    const feat = scores[c.id].features
-    // A card the rule layer cannot read is decided by the model; with no model
-    // there is no evidence against it, so it stays. Short and code-heavy
-    // excerpts are not filtered out for being short or code-heavy.
-    if (!canScore && !feat.measurable) {
-      keptUnmeasurable++
-      return true
+    if (!canScore) {
+      if (!scores[c.id].features.measurable) return { keep: true, unmeasurable: true }
+      return { keep: f.human >= minHuman, unmeasurable: false }
     }
-    if (f.human < minHuman) return false
-    if (!canScore) return true // no model: the three questions are unmeasured, judge on human voice alone
-    return f.accessible >= minAccessible && f.takeaway >= minTakeaway
-  })
-  unmeasurable = keptUnmeasurable
+    return { keep: f.human >= minHuman && f.accessible >= minAccessible && f.takeaway >= minTakeaway, unmeasurable: false }
+  }
+  const judged = cards.map((c) => ({ card: c, ...verdict(c) }))
+  kept = judged.filter((j) => j.keep).map((j) => j.card)
+  unmeasurable = judged.filter((j) => j.unmeasurable).length
   console.log(
     canScore
       ? `filter (human>=${minHuman}, accessible>=${minAccessible}, takeaway>=${minTakeaway}): ${before - kept.length} dropped; human = 0.65*model + 0.35*features`

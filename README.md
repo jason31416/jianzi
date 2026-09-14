@@ -41,9 +41,31 @@ JIANZI 负责让用户遇见内容和作者，深度留给知乎原文。它不�
 - 不爬取知乎站点，不批量滥用站内用户数据。
 - Access Secret、`app_key`、OAuth token 等凭证不得进入代码、前端响应、日志、截图或演示视频。
 - 作者信息和精选评论可能缺失，界面需要支持对应的空状态。
+- 内容池由 `scripts/build-pool.mjs` 离线生成，产物是 `content/pool.json`。第一道采集门槛是纯规则，第二道文本特征层也是纯规则且离线，只有第三道模型评分需要网络和凭据；没有凭据时前两道照常工作。
+
+## 本地命令
+
+```bash
+npm run dev                # 本地开发
+npm run build              # 生产构建
+npm run lint               # eslint
+npm run check:features     # 文本特征层的自检，纯 node，无框架
+
+# 重建内容池（默认读 ../pool-raw，即主仓库的种子目录）
+node scripts/build-pool.mjs
+
+# 接模型评分时，凭据只走环境变量，不落盘
+LLM_BASE_URL=https://api.example.com/v1 \
+LLM_API_KEY=... \
+LLM_MODEL=... \
+LLM_CONCURRENCY=2 \
+node scripts/build-pool.mjs
+```
+
+模型评分不是必跑项：不配 `LLM_BASE_URL` / `LLM_API_KEY` / `LLM_MODEL` 时脚本仍然产出完整的池子，只是不过滤。评分结果缓存在 `content/scores.json`，按卡片 id 存，改 prompt 或换模型会自动重评。
 
 ## 开发状态
 
 项目目前处于 MVP 开发阶段。前端优先完成可独立演示的卡片桌和专栏视图，再通过清晰的数据边界接入后端内容池与知乎 OAuth。
 
-技术栈为 Next.js 全栈 + Vercel，单域名同时承载前端与知乎 OAuth 回调。视觉风格为纸张拟物 + 报纸质感。启动命令与部署方式会随代码落地补充。
+技术栈为 Next.js 全栈 + Vercel，单域名同时承载前端与知乎 OAuth 回调。视觉风格为纸张拟物 + 报纸质感。部署方式会随代码落地补充。
