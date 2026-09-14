@@ -39,6 +39,7 @@
  *   LLM_MODEL      model id to send
  *
  * Optional, with defaults: POOL_MIN_HUMAN=6 POOL_MIN_ACCESSIBLE=6 POOL_MIN_TAKEAWAY=6
+ * LLM_CONCURRENCY=4 (lower it for rate-limited or free endpoints) LLM_TIMEOUT_MS=60000
  * Set POOL_KEEP_ALL=1 to score everything and keep every card regardless of score.
  *
  * Without LLM_BASE_URL / LLM_API_KEY the script still writes pool.json — the whole
@@ -67,6 +68,7 @@ const {
   LLM_API_KEY,
   LLM_MODEL,
   LLM_TIMEOUT_MS = '60000',
+  LLM_CONCURRENCY = '4',
   POOL_MIN_HUMAN = '6',
   POOL_MIN_ACCESSIBLE = '6',
   POOL_MIN_TAKEAWAY = '6',
@@ -252,8 +254,8 @@ let kept = cards
 
 if (canScore) {
   const stale = cards.filter((c) => scores[c.id]?.llm?.promptHash !== promptHash || scores[c.id]?.llm?.model !== LLM_MODEL)
-  console.log(`scoring ${stale.length} of ${cards.length} cards with ${LLM_MODEL} (${stale.length ? promptHash : 'all cached'})`)
-  const results = await mapLimit(stale, 4, (card) => scoreOne(prompt, card))
+  console.log(`scoring ${stale.length} of ${cards.length} cards with ${LLM_MODEL} at concurrency ${LLM_CONCURRENCY} (${stale.length ? promptHash : 'all cached'})`)
+  const results = await mapLimit(stale, Math.max(1, Number(LLM_CONCURRENCY)), (card) => scoreOne(prompt, card))
   results.forEach((r, i) => {
     const card = stale[i]
     if (!r) return
