@@ -1,0 +1,44 @@
+/*
+ * JIANZI design tokens. Paper skeuomorphism with newspaper typography — see DESIGN.md.
+ * Deliberately light-only: paper is paper, and a dark newsprint does not exist.
+ */
+:root {
+  /* Ink is warm near-black, never pure #000 — pure black never came off a press. */
+  --ink: #1f1c18;
+  --ink-soft: #6b655c;
+  --ink-faint: #a49d92;
+
+  /* Paper and the desk it lies on. */
+  --paper: #f4efe4;
+  --paper-edge: #e2dac9;
+  --desk: #cfc7b6;
+
+  /* The colour plate that missed registration. Also the stamp ink. */
+  --registration: #b5412f;
+
+  --rule: #cbc3b4;
+
+  --card-w: 400px;
+  --reading: 1.9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--desk);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
