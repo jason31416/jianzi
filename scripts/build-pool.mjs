@@ -16,7 +16,9 @@
  *      against the marks of machine prose: scaffold words, list numbering,
  *      buzzwords, news and tutorial register. Always on, because it is the only
  *      filter that exists when no model is configured, and because a model
- *      under-rates human-ness that lives in form rather than meaning.
+ *      under-rates human-ness that lives in form rather than meaning. It drops
+ *      nothing: a short or code-heavy excerpt is marked unmeasurable and passed
+ *      on to the model, or kept when there is no model.
  *   3. Scoring — needs a model. Every surviving card answers the three questions
  *      from DESIGN.md section 9.5 (human voice, still true in three years,
  *      readable by an outsider, something to take away). Costs money, needs
@@ -173,7 +175,8 @@ for (const f of files) {
 await mkdir(avatarDir, { recursive: true })
 const seenIds = new Set()
 const cards = []
-const dropped = { duplicate: 0, notZhihu: 0, noTimestamp: 0, anonymous: 0, tooShort: 0, codeDominant: 0 }
+const dropped = { duplicate: 0, notZhihu: 0, noTimestamp: 0, anonymous: 0 }
+let unmeasurable = 0
 
 for (const it of items) {
   if (seenIds.has(it.ContentID)) {
@@ -196,18 +199,11 @@ for (const it of items) {
   }
 
   // Layer two: text features. Free, deterministic, always on — it is the only
-  // filter available when no model is configured.
+  // filter available when no model is configured. Nothing is dropped here; a
+  // short or code-heavy excerpt is marked unmeasurable and decided later.
   const title = cleanTitle(it.Title ?? '')
   const excerpt = it.ContentText ?? ''
   const features = extractFeatures(title, excerpt)
-  if (features.hardDrop === 'too-short') {
-    dropped.tooShort++
-    continue
-  }
-  if (features.hardDrop === 'code-dominant') {
-    dropped.codeDominant++
-    continue
-  }
 
   let avatar = ''
   try {
@@ -290,16 +286,26 @@ if (!POOL_KEEP_ALL) {
   const minAccessible = Number(POOL_MIN_ACCESSIBLE)
   const minTakeaway = Number(POOL_MIN_TAKEAWAY)
   const before = cards.length
+  let keptUnmeasurable = 0
   kept = cards.filter((c) => {
     const f = scores[c.id].final
+    const feat = scores[c.id].features
+    // A card the rule layer cannot read is decided by the model; with no model
+    // there is no evidence against it, so it stays. Short and code-heavy
+    // excerpts are not filtered out for being short or code-heavy.
+    if (!canScore && !feat.measurable) {
+      keptUnmeasurable++
+      return true
+    }
     if (f.human < minHuman) return false
     if (!canScore) return true // no model: the three questions are unmeasured, judge on human voice alone
     return f.accessible >= minAccessible && f.takeaway >= minTakeaway
   })
+  unmeasurable = keptUnmeasurable
   console.log(
     canScore
       ? `filter (human>=${minHuman}, accessible>=${minAccessible}, takeaway>=${minTakeaway}): ${before - kept.length} dropped; human = 0.65*model + 0.35*features`
-      : `filter (rule-only, human>=${minHuman}): ${before - kept.length} dropped; no model configured, so accessible/takeaway are not applied`,
+      : `filter (rule-only, human>=${minHuman}): ${before - kept.length} dropped, ${unmeasurable} kept unmeasurable; no model configured, so accessible/takeaway are not applied`,
   )
 } else {
   console.warn('POOL_KEEP_ALL=1 — scoring and features still run, nothing is filtered out')
@@ -310,7 +316,7 @@ await writeFile(outFile, JSON.stringify(kept.map(({ _features, ...card }) => car
 
 console.log(`read    ${items.length} raw items from ${files.length} seed files`)
 console.log(
-  `dropped ${dropped.duplicate} duplicate, ${dropped.notZhihu} non-zhihu, ${dropped.noTimestamp} undated, ${dropped.anonymous} anonymous, ${dropped.tooShort} too-short, ${dropped.codeDominant} code-dominant`,
+  `dropped ${dropped.duplicate} duplicate, ${dropped.notZhihu} non-zhihu, ${dropped.noTimestamp} undated, ${dropped.anonymous} anonymous`,
 )
 console.log(`gated   ${cards.length} cards, ${scored} newly scored`)
 console.log(`wrote   ${kept.length} cards to content/pool.json`)

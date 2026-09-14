@@ -12,6 +12,11 @@
  *   3. Every score has to be explainable. The hits carry the matched strings, so
  *      a human can see why a card scored where it did.
  *
+ * Nothing is dropped here. A short excerpt and a code-heavy excerpt are marked
+ * unmeasurable instead: the rule layer has nothing to judge, which is not the
+ * same as judging against. Those cards are decided by the model, or kept as-is
+ * when there is no model.
+ *
  * ruleScore is 0-10 and deliberately coarse: 5 means "nothing either way".
  */
 
@@ -55,19 +60,22 @@ function codeRatio(text) {
 /**
  * @param {string} title
  * @param {string} excerpt
- * @returns {{chars:number, ruleScore:number, positive:object, negative:object, hits:Array, hardDrop:string|null}}
+ * @returns {{chars:number, ruleScore:number, measurable:boolean, flags:object, positive:object, negative:object, hits:Array}}
  */
 export function extractFeatures(title, excerpt) {
   const text = `${title ?? ''}\n${excerpt ?? ''}`
   const chars = text.length
-
-  if (chars < 150) {
-    return { chars, ruleScore: 0, positive: {}, negative: {}, hits: [], hardDrop: 'too-short' }
-  }
-
   const code = codeRatio(excerpt ?? '')
-  if (code > 0.15) {
-    return { chars, ruleScore: 0, positive: {}, negative: {}, hits: [], hardDrop: 'code-dominant', codeRatio: +code.toFixed(3) }
+
+  // Two shapes the rule layer cannot judge, but must not throw away either: a
+  // very short excerpt has no room to show its marks, and one that is mostly
+  // code says nothing about how a person writes. They are reported as
+  // unmeasurable and left to the model, or kept when there is no model.
+  const flags = { short: chars < 150, codeHeavy: code > 0.15 }
+  const measurable = !flags.short && !flags.codeHeavy
+
+  if (!measurable) {
+    return { chars, codeRatio: +code.toFixed(3), ruleScore: 5, measurable, flags, positive: {}, negative: {}, hits: [] }
   }
 
   const collect = (table, polarity) => {
@@ -109,11 +117,12 @@ export function extractFeatures(title, excerpt) {
     chars,
     codeRatio: +code.toFixed(3),
     ruleScore,
+    measurable: true,
+    flags,
     breadth: { positive: posFired, negative: negFired },
     positive: pos.counts,
     negative: neg.counts,
     hits: [...pos.hits, ...neg.hits].sort((a, b) => b.count - a.count).slice(0, 12),
-    hardDrop: null,
   }
 }
 

@@ -5,9 +5,9 @@
  *   node scripts/check-features.mjs
  *
  * Asserts the contract the pool builder relies on: hand-written prose scores
- * high, SEO scaffolding and code score low, code-dominant and tiny excerpts are
- * hard-dropped, and the combination never lets features rescue a card the model
- * rejected outright.
+ * high, SEO scaffolding and code score low, short and code-heavy excerpts are
+ * marked unmeasurable rather than dropped, and the combination never lets
+ * features rescue a card the model rejected outright.
  */
 import { extractFeatures, combineHuman } from './lib/text-features.mjs'
 
@@ -60,12 +60,12 @@ const code = extractFeatures('Python 装饰器', CODE)
 const tiny = extractFeatures('短', TINY)
 
 check('human ruleScore >= 7', human.ruleScore, human.ruleScore >= 7)
-check('human not dropped', human.hardDrop, human.hardDrop === null)
+check('human measurable', human.measurable, human.measurable === true)
 check('human detected first person + named relation', human.positive, human.positive.first_person_narration > 0 && human.positive.named_relation > 0)
 check('seo ruleScore <= 4', seo.ruleScore, seo.ruleScore <= 4)
 check('seo flagged scaffolding', seo.negative, (seo.negative.scaffold ?? 0) >= 2)
-check('code hard-dropped', code.hardDrop, code.hardDrop === 'code-dominant')
-check('tiny hard-dropped', tiny.hardDrop, tiny.hardDrop === 'too-short')
+check('code marked unmeasurable, not dropped', code.flags, code.measurable === false && code.flags.codeHeavy === true)
+check('tiny marked unmeasurable, not dropped', tiny.flags, tiny.measurable === false && tiny.flags.short === true)
 check('human beats seo', [human.ruleScore, seo.ruleScore], human.ruleScore > seo.ruleScore)
 
 console.log('combination:')
