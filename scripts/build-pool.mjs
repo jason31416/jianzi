@@ -252,36 +252,53 @@ const canScore = Boolean(LLM_BASE_URL && LLM_API_KEY && LLM_MODEL)
 let scored = 0
 let kept = cards
 
+const persist = async () =>
+  writeFile(scoreFile, JSON.stringify({ version: 2, model: LLM_MODEL ?? null, promptHash, scores }, null, 2) + '\n')
+
+// One place computes the blended verdict, so the pre-score pass and the
+// post-score update can never disagree about which fields exist.
+const finalize = (card) => {
+  const entry = scores[card.id]
+  entry.final = {
+    human: combineHuman(entry.llm?.human, entry.features.ruleScore),
+    rule: entry.features.ruleScore,
+    llm: entry.llm?.human ?? null,
+    evergreen: entry.llm?.evergreen ?? null,
+    accessible: entry.llm?.accessible ?? null,
+    takeaway: entry.llm?.takeaway ?? null,
+  }
+}
+
+// Text features are recomputed every run, so they are attached to every card up
+// front — before any model call, and before anything is written to disk.
+for (const card of cards) {
+  const { _features } = card
+  scores[card.id] = { ...(scores[card.id] ?? {}), features: _features }
+  finalize(card)
+}
+
 if (canScore) {
   const stale = cards.filter((c) => scores[c.id]?.llm?.promptHash !== promptHash || scores[c.id]?.llm?.model !== LLM_MODEL)
   console.log(`scoring ${stale.length} of ${cards.length} cards with ${LLM_MODEL} at concurrency ${LLM_CONCURRENCY} (${stale.length ? promptHash : 'all cached'})`)
-  const results = await mapLimit(stale, Math.max(1, Number(LLM_CONCURRENCY)), (card) => scoreOne(prompt, card))
-  results.forEach((r, i) => {
-    const card = stale[i]
-    if (!r) return
-    scores[card.id] = {
-      ...(scores[card.id] ?? {}),
-      llm: { ...r, model: LLM_MODEL, promptHash, scoredAt: new Date().toISOString() },
+  let done = 0
+  await mapLimit(stale, Math.max(1, Number(LLM_CONCURRENCY)), async (card) => {
+    const r = await scoreOne(prompt, card)
+    done++
+    if (r) {
+      scores[card.id] = { ...(scores[card.id] ?? {}), llm: { ...r, model: LLM_MODEL, promptHash, scoredAt: new Date().toISOString() } }
+      finalize(card)
+      scored++
     }
-    scored++
+    // Persist as we go: a scored pool is expensive, a thirty-minute silent run
+    // that dies at minute twenty-nine is not worth the discount.
+    if (done % 10 === 0 || done === stale.length) {
+      await persist()
+      console.log(`  scored ${done}/${stale.length} (${scored} ok)`)
+    }
   })
 }
 
-// Text features are recomputed every run, so they are written back per card
-// whether or not the model was called.
-for (const card of cards) {
-  const { _features, ..._rest } = card
-  scores[card.id] = { ...(scores[card.id] ?? {}), features: _features }
-  scores[card.id].final = {
-    human: combineHuman(scores[card.id].llm?.human, _features.ruleScore),
-    rule: _features.ruleScore,
-    llm: scores[card.id].llm?.human ?? null,
-    evergreen: scores[card.id].llm?.evergreen ?? null,
-    accessible: scores[card.id].llm?.accessible ?? null,
-    takeaway: scores[card.id].llm?.takeaway ?? null,
-  }
-}
-if (cards.length) await writeFile(scoreFile, JSON.stringify({ version: 2, model: LLM_MODEL ?? null, promptHash, scores }, null, 2) + '\n')
+if (cards.length) await persist()
 
 if (!POOL_KEEP_ALL) {
   const minHuman = Number(POOL_MIN_HUMAN)
