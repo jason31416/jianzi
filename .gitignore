@@ -39,7 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# content pool — real Zhihu excerpts and author avatars.
-# Held out of the public repo pending a call on publishing user content; see notice.
-/public/avatars/

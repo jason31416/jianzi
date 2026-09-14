@@ -1,1 +1,411 @@
-[]
+[
+  {
+    "id": "-4783870222516513050",
+    "title": "大模型的能力是否被高估了?",
+    "url": "https://www.zhihu.com/question/2066480534339982908/answer/2077294219144839432?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Answer",
+    "excerpt": "我觉得大模型能力被低估了。 \n我们高估的是.：阶段性的商业价值。\nSam Altman 凭一己之力开创了 Chatbot 时代。Chatbot 也现实地改变很多人的学习方式，吸收信息的方式。\n但在这个模式中，投入越大的公司，亏得越多。OpenAI 、Google、字节跳动亏得最多。\n接下来是 Office Agent 时代，以生产代码、Office 文件，执行自动化任务为主。ARR 都上来了，但持续资本投入仍然比 ARR 高出一个数量级，你的营收似乎永远达不到“下一期的 CapEx”，投资人需要不断地奶着你，我觉得，风险投资和小股盘很快会奶不住 AI 公司。\n2027 年，应该是“AI 自主研究元年”，目前很难预测 “研究级 AI”的收入模式，拔毛对象大概是那种高毛利行业或创业公司，那些时间价值极高，每个月研发投入>1 亿的项目，不是那种温水煮青蛙式烧 Token 的 Office 日常 ，而是爆沸式燃烧最高级的 Token。",
+    "author": {
+      "name": "Trisimo崔思莫",
+      "badge": "大模型话题下的优秀答主",
+      "avatar": "/avatars/8e701cf1b412.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 121,
+      "comments": 5,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "5975585717401815035",
+    "title": "大模型会产生许多高认知、高能力的“穷人”",
+    "url": "https://zhuanlan.zhihu.com/p/2073848689366508530?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "我认为未来商业竞争中最核心的竞争，会从“我能不能做出来？”，转变成：\n“我做出来以后，到底有没有人看？”\nAI 解决了大量供给，但是：AI 没有解决需求。\n第三，Assetization：你能不能把 AI 的能力资产化？\n还有最后一种人会真正受益，就是：能够把 AI 的能力资产化的人。\n我现在看到很多人使用 AI，有一个特别大的误区。他一天做的事情从十件变成一百件，特别兴奋：写十份报告、写五千行代码、做二十个 PPT、生成五十张图片、回复一百封邮件。晚上十二点躺在床上，觉得今天的生产力实在太高了。\n但第二天早上醒过来以后，还得重新开始。\n这其实只是把自己的劳动效率提高了。\n另外一种人在做完全不同的事情。他利用 AI 做了一个软件，建立了一个 Agent，积累了一个内容账号，拥有了一万个客户，形成了一个品牌，建立了一套可以不断自动运行的业务系统。\n晚上他睡觉以后，这些东西还在那里；明年这些东西也还在那里，甚至还在继续创造收入。\n这两个人表面看起来都“非常会用 AI”，实际上完全不是一回事。一个是在提高 Flow of Labor——劳动流量，另外一个是在增加 Stock of Assets——资产存量。\n所以未来真正拉开财富差距的是：\n谁能够把这十倍的生产力，沉淀成明天依然属于自己的资产。\n \n软件是资产，IP 是资产，账号是资产，数据是资产，客户关系是资产，品牌是资产，自动运行的 Agent 是资产，公司和股权当然更是资产。\n所以 AI 时代，我们真正需要培养的可能不是简单的“AI 使用能力”，而是：AI 资产化能力。\n最后\n过去几百年，我们一直相信一件事情：知识改变命运。\n多读书，上更好的大学，掌握更复杂的技能，成为专业人士，这套逻辑为什么成立？一个重要原因就是：认知能力过去一直是稀缺资源。\n但是大模型第一次让我们开始面对一个新的经济现实：知识可以大规模复制，代码可以大规模复制，设计可以大规模复制，甚至相当一部分过去被我们称为“能力和经验”的东西，也开始可以大规模、低成本复制。\n能力和经验当然不会因此失去意义，但是：能力本身可能不再足以构成经济护城河。\n所以我认为 AI 时代的穷人，可能还不只是那些完全不会使用 AI 的人，还有另外一批人：\n非常会使用 AI，却始终只把自己的能力按小时出售的人。\n \n他们拥有最先进的模型，掌握最先进的 Agent，每天的生产率是过去自己的十倍。\n他们会觉得自己前所未有地强，甚至可能拥有过去只有精英才能拥有的知识能力。",
+    "author": {
+      "name": "郭炜",
+      "badge": "",
+      "avatar": "/avatars/922b5706af61.jpg"
+    },
+    "comments": [
+      "agree",
+      "[赞同][赞同]"
+    ],
+    "stats": {
+      "votes": 5,
+      "comments": 2,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-7375955237902610339",
+    "title": "大模型原理通识:从”猜下一个词”到”一本正经地胡说八道”",
+    "url": "https://zhuanlan.zhihu.com/p/2079214588445434811?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "你向 AI 助手问一个问题，它几秒内就能给出一段结构完整、语气笃定的回答。这听起来很神奇，但拆解开来看，整个生成过程其实简单得惊人——AI 本质上只是在做一件事：根据前文，猜下一个最可能出现的词。\n理解了这一点，你就理解了大模型为什么能写文章、编代码、翻译语言，也理解了它为什么会”一本正经地胡说八道”。下面我们逐一拆开来看。\n一、一句话看懂大模型在干什么：Next Token Prediction\n大模型的核心任务叫 Next Token Prediction（下一个词预测）。\n 给模型上半句，它根据”学”过的海量文本，算出下半句该接什么。\n打个比方：你打字时输入法会自动联想，”今天天气真”后面大概率接”好”而不是”甜”。大模型干的就是这件”极致的联想”——只不过它看的不是前面几个字，而是前面几千甚至几十万个字，并且每次只”补”一个 Token，再把刚补的内容加进上下文，预测下一个，循环往复，直到生成完整回答[citation:8][citation:10]。\n这个过程叫做自回归生成（Autoregressive Generation）。整段长长的文章、代码、对话，其实是由无数个”猜下一个碎片”的微小决策堆叠出来的[citation:21]。\n预测得准，靠的不是”理解”，而是学会了词语之间海量、复杂的统计关联。正因为如此，它擅长模仿语言风格，却缺乏辨别真伪的能力——这恰恰是幻觉的种子。\n二、Transformer 注意力机制：让每个词都能”环顾四周”\n大模型用什么”大脑”来做这个预测？答案是 Transformer，尤其是其中的 注意力机制（Attention）。\n不用公式，只看画面来理解：\n想象你在听一场千人讲座，戴着降噪耳机。当教授说到某个词时，你的大脑会瞬间扫描全场，给每个听众打一个”分”：谁和当前内容最相关，谁次之，谁几乎无关。然后把所有人的”信息”按相关度加权混在一起，形成你对当前这个词的全新理解。\n注意力机制就是这个过程的计算版：\n・对每个词，模型生成三个向量：Query（我在找什么）、Key（每个人能提供什么）、Value（每个人的实际信息）。\n・用 Query 去匹配每个 Key，得到”相关度分数”。\n・把分数变成概率（Softmax），再按概率加权求和所有 Value，得到这个词带上了上下文信息的”新表示”[citation:14][citation:19]。\n多头注意力（Multi-Head Attention） 则是让多个”小专家”并行工作：一个盯着语法结构，一个找语义含义，一个关注指代关系……各看各的角度，最后拼在一起，模型对句子的理解就丰富得多[citation:19]。",
+    "author": {
+      "name": "lottelyn凛酱",
+      "badge": "",
+      "avatar": "/avatars/ce1b6bbdb4a7.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 0,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "5993467961782316261",
+    "title": "大语言模型是不是发展到头了?",
+    "url": "https://www.zhihu.com/question/1947700097883313342/answer/2078014487781697122?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Answer",
+    "excerpt": "一、当前 AI 的发展状态\n虽然二线厂商仍在努力追赶，但 coding agent 基本已可视为一个被解决的问题：只要能提供可评估的 reward 和对应 data，学习本身在原理上已经可行。泛 coding 领域也类似，相关生产力工具和部分数学推理近期都有不少进展。更极端地推演，人类知识里到底有多少是 non-trivial 且不容易被学习的？飞轮一旦构建起来，至少目前看模型仍然是越大越好，往前再看两到三个版本问题不大；不过这一点上，国内的计算资源很可能成为瓶颈。当然，post-training 与 pre-training 的协同本身是很大的工程问题，其中有无数 costly & dirty 的技术细节，这也是顶尖人才的价值所在。\n二、各家 AI 进展的一些事后观察\n个人感觉，硅谷真正把大模型跑明白的厂商其实只有两家，若算上衍生团队，目前大致还包括另外两家半。大模型是一个很客观的产品，这种客观不来自 benchmark 的数值，而来自模型实实在在的能力。它只以事实为依据，不以领导意志为转移。老派 IT 和互联网企业那种坚决贯彻领导意志的思路，已经匹配不了大模型的发展需求。国内发展也类似：几家新公司如火如荼，几家老公司房子着火。这一轮大模型的发展放大了顶级 IC 的价值，管理和人事能力反而变得次要，这也是“小登”们崛起的原因。那些适应了互联网版本的 winner 和公司架构，都有些不太适应当下的新版本。\n\n三、AI4S 和研究的一些思考\nAI4DD/Chem 继续投入的价值已经不大，因为 O/A 已经占据了明确赛道。\n目前看，更开放的研究新问题能力还缺乏很好的规范和数据，而且暂时看不到直接价值，所以各家很难大规模投入；这一点上，我觉得仍有一些可做的工作。\n国内外一些企业在做的，也多是对可规范任务的优化，包括 O/A 发布的一些进展，以及国内字节的 EdgeBench 等。\n但 AI 研究人员对其他科研领域的理解，多少被 coding 的胜利影响了。\n被 coding data 异化的基础模型，很容易陷入无尽工程细节，从而丧失对研究本身的把控。",
+    "author": {
+      "name": "顾实",
+      "badge": "",
+      "avatar": "/avatars/08c0ab6b7cf1.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 493,
+      "comments": 19,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-7032078961203513401",
+    "title": "如何最简单、通俗地理解大模型?",
+    "url": "https://www.zhihu.com/question/660798714/answer/2048077593568719023?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Answer",
+    "excerpt": "AND触发函数 \\mathbf{1}(x' \\text{ triggers AND relation } T) 表示输入变量集合 T\\subseteq N 之间的与关系。当 T 中所有变量都出现在 x' 中，即没有被遮挡时，该函数返回1。OR触发函数 \\mathbf{1}(x' \\text{ triggers OR relation } T) 表示输入变量集合 T\\subseteq N 之间的或关系。只要 T 中任意一个变量出现在 x' 中，即没有被遮挡，该函数就返回1。\n直观来说，交互机理可以理解为模型在预测时自动使用的 词、token 或短语之间的组合模式。如图1所示，给定一个物理相关的输入 prompt =『 Isaac Newton’s laws of motion describe the relationship between force, mass, and 』，模型可能会在『 laws / of / motion』这些词之间建模一个词组关系（与交互）；当这些词同时出现时，该模式会被激活，并提高模型预测『 acceleration 』这一目标 token 的置信度。换言之，模型并不是孤立地理解每个词，而是会利用多个输入变量之间的组合关系来完成预测。\n交互的稀疏性。我们早期研究已经证明，一个神经网络在给定样本上提取出的有效交互机理的数量通常是相对有限的，实践中往往只有几十到一百多个显著交互机理。也就是说，大量潜在交互机理的数值效用接近于 0，真正决定模型输出的只是其中一小部分。\n四、可靠的交互机理 vs. 不可靠的交互机理\n既然神经网络的输出可以被严格表示为50-150个AND-OR交互机理的数值效用的和，我们可以进一步量化在大模型决策中，哪些交互机理是可靠的表征，哪些交互机理是不可靠的表征。本文从三个维度衡量交互的表征质量：复杂度、泛化性和正负效应抵消程度。简单来说，可靠的交互机理往往更简单、更可泛化，并且能稳定地支持模型预测；而噪声交互机理往往更复杂、不可泛化，并且正负效应大量相互抵消。\n第一，交互机理的阶数，也就是复杂度。低阶交互机理往往表示更简单、更可靠的推理模式，而高阶交互机理则更容易对应复杂、不稳定的过拟合模式。\n这里的“阶数”指的是一个交互机理涉及多少个输入变量。\nOder(S) = |S|。\n例如，一个只涉及两个词的交互机理是低阶交互机理；而一个同时涉及多个词、复杂组合的交互机理则是高阶的交互机理。",
+    "author": {
+      "name": "Qs.Zhang张拳石",
+      "badge": "新知答主",
+      "avatar": "/avatars/1fe6aeaf5bdd.jpg"
+    },
+    "comments": [
+      "微调大模型有点像“热剩菜”——稍微加热一下很好吃，一直加热就糊了。所以不要盲目多喂数据、多训练，抓住那个短暂的“刚热好”的瞬间就停手，能省下一大半力气，效果还更好？"
+    ],
+    "stats": {
+      "votes": 59,
+      "comments": 1,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "751700830126540156",
+    "title": "你认为认知大模型本质是什么?",
+    "url": "https://www.zhihu.com/question/1889782121071089070/answer/2079941569768169855?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Answer",
+    "excerpt": "当你被问到”大模型到底是怎么工作的”，大多数人只会说”它就是吃了很多数据，很厉害”，然后就接不下去了。\n问题出在哪？不是你不聪明，而是大模型的知识散落在论文、博客、视频、课程里，像一堆碎片，没人帮你把它拼成一张可以走通的地图。\n我花了很长时间，做了一件笨但有价值的事：把大模型从里到外，拆成了 65 块。\n这就是《拆解大模型：普通人也能看懂 AI 的大脑》这本书的由来。\n一张可以走通的地图，而不是一堆名词\n市面上讲 AI 的内容，大多是两种：一种是”科普爽文”，讲个热闹，看完还是不懂；一种是”论文搬运”，术语堆砌，普通人看了一眼就劝退。\n这本书想做的是第三条路：既不空谈概念，也不假设你有数学或编程背景，而是把大模型当成一台机器，从最小的零件（神经元）讲起，一路讲到它能做的事（写代码、做 Agent、理解世界）。\n全书 65 章 + 4 个附录，顺着一条清晰的路径走下来：\n・启蒙篇：AI 到底是不是”思考”，机器学习的三块基石（数据、模型、学习）\n・深度学习基础：感知机、反向传播、梯度下降、过拟合——把地基打牢\n・核心架构：CNN、ResNet、图神经网络\n・语言建模演进：统计模型 → Embedding → RNN/LSTM → 自注意力 → Transformer，把”为什么是 Transformer”这条线索讲透\n・生成模型：GAN、VAE、扩散模型、Stable Diffusion、文生视频\n・大模型核心：自监督、预训练、指令微调、Prompt、推理、RLHF/DPO\n・应用与工程：RAG、Agent、MCP、并行训练、量化、推理引擎、DeepSeek 工程实践\n・前沿与未来：中国大模型生态、新架构、具身智能、世界模型\n你会发现，”大模型”不是突然蹦出来的黑科技，而是一条一环扣一环的演化链。这本书的价值，就是让你第一次把这些点连成线。\n这本书跟别的 AI 书最不一样的地方",
+    "author": {
+      "name": "AI传道",
+      "badge": "",
+      "avatar": "/avatars/ec024712ea8a.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 1,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-444714665023785521",
+    "title": "大语言模型的核心特征:遇强则强,遇弱则弱",
+    "url": "https://zhuanlan.zhihu.com/p/2065451145896653333?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "大语言模型（LLM，下文简称“大模型”）的核心特征是遇强则强，遇弱则弱。\n意思是，使用者的水平越高，大模型展现的能力也越高；使用者的水平越低，大模型展现出的能力也越平平。\n也就是说，大模型是对使用者适配的——\n大模型在对人类向下兼容！\n为什么这么说呢？目前性能最强的大模型已经能在国际数学奥林匹克竞赛（IMO）上拿满分，说明大模型的“智商”已经超过了99.999%的人类，这里的“智商”更具体点说就是高阶、长链条的逻辑推理能力。\n而在此之前，大模型已经具备了人类已知的绝大部分知识，也就是说，大模型的“知识库”（此处只是通俗化类比，大模型并没有专门的知识库，大模型本身就是知识库）几乎是无限的，无人能及！\n所以，现在顶尖的大模型，其智商+知识库（对标人类的“长时记忆”）这对组合已经强大得可怕！\n认清这个现实，我再来谈谈可以怎么办！\n先说三个常见的谬误：\n谬误一：有些人喜欢拿一些并不难的“挖坑题”去考大模型，看大模型犯错很开心，认为大模型还很笨，还不及人类。\n这是最愚蠢的做法！\n为什么呢？因为大模型和人脑是两种迥然不同的智能形态！大模型当然有短板，会犯人脑看来的低级错误，这都是很正常的。大模型最主要的缺陷是无法认识真实的物理世界，而人是生活在物理世界中的！\n所以现在AI业界的一大热门方向是研发“世界模型”，世界模型和大语言模型的思路和架构是完全不同的，目的就是要弥补大语言模型的不足甚至超越之，但这是后话，先不谈！\n这里的关键是，你不能发现了大模型的短板而看不到它的长处啊！\n大模型的短板可能是比你短一点，可它的长处可是比一万个你串联起来都要长啊！\n如果你是聪明人，你的思路应该是想尽办法发挥大模型的长处，而不是千方百计去揭它的短，然后获得一点点的心理安慰，这是阿Q的做法！\n《道德经》说：“上士闻道，勤而行之；中士闻道，若存若亡；下士闻道，大笑之。”\n现在这么强的大模型就在眼前，我们要做的是勤而行之还是大笑之？\n谬误二：把使用AI当作错误，对AI避而远之，以自己不需要用AI为荣。\n这在西方叫卢德主义，我们通俗讲是做鸵鸟，脑袋埋在沙子里，好像什么都没有发生。\n一个争议的话题是：大学生能不能用AI做研究、写论文？现在很多学校是禁止的，这就是鸵鸟政策。\n为什么呢？首先，教授都在用AI，你不让学生用，凭什么？\n其次，关键不在于用不用AI，而是你交出来的是不是垃圾。\n如果学生自己完全不动脑、不下功夫，全让AI操刀，那AI写出来的肯定是学术垃圾。",
+    "author": {
+      "name": "采铜",
+      "badge": "知势榜心理学领域影响力榜上榜答主",
+      "avatar": "/avatars/6b75f6f05cae.jpg"
+    },
+    "comments": [
+      "Ai大模型功能强大，是未来人生改变的趋势",
+      "采铜老师，我去微信读书读一下，很多年前买过你写的《精进》，写的非常精彩[爱]",
+      "AI这个高速发展的领域，目前根本不用考虑买“应用”类书籍，你刚买回来就过时了，如果一定花这个钱，买点原理类的书看看就好。"
+    ],
+    "stats": {
+      "votes": 22,
+      "comments": 9,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "1625993704225183465",
+    "title": "如何看待国产大模型的现状?",
+    "url": "https://www.zhihu.com/question/605498415/answer/2078138346262508419?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Answer",
+    "excerpt": "换句话说，智谱不是简单地把旧项目做大，而是在从“一家一家交付”，转向“让更多客户直接调用”。这至少说明，国产大模型不再只有发布会和参数榜单，已经出现了真实购买行为。\n二、坏消息：有人买，不等于已经赚钱\n知乎上谈大模型API，很容易陷入“每百万Token多少钱”的价格比较。\n但企业真正付的钱，不只是标价。还要计算一项任务调用多少次、成功率多高、失败后要不要人工返工，以及推理成本能不能随着规模下降。\n便宜的模型，如果反复调用仍做不成任务，最后可能更贵；价格高一点的模型，如果一次完成，反而可能更省。\n智谱上半年毛利约2.52亿元，毛利率26.4%。这说明业务不是没有毛利，但这些毛利距离覆盖研发、销售和管理投入仍然很远。\n所以，判断API是不是好生意，至少要同时看四件事：毛利率、客户留存、单位推理成本，以及一次任务真正完成的成本。\n三、20.7亿元亏损，究竟花到哪里去了\n智谱上半年研发开支约21.31亿元，比同期收入高出一倍有余。只看这一项，就不难理解亏损为什么难以收窄。\n大模型生意有一个麻烦：公司不能只卖今天的模型。\n竞争对手能力提升，旧模型会快速贬值；行业集体降价，原来的毛利也可能被压缩。公司必须一边出售当前API，一边投入人才、算力和下一代模型。\n所以，智谱现在卖出去的是调用量，买回来的则是下一轮竞争资格。前者已经开始形成收入，后者仍在持续吞噬现金。\n这和成熟软件公司不同。成熟软件完成开发后，可以在较长时间里重复销售；基础模型更像一场不断重新起跑的比赛，领先本身就要持续付费。\n四、天眼查补上了财报之外的一层\n如果只看财报，我们看到的是收入、成本和亏损；把视线移到公司图谱，还能看到这门生意怎样落到现实组织里。\n天眼查公开信息显示，北京智谱华章科技股份有限公司成立于2019年，注册资本约4656万元。围绕核心主体，还能看到其对外投资与区域公司布局。\nAPI看起来是一行代码，真正铺向更多行业和地区，仍然要靠现实中的公司和团队完成。\n所以，国产大模型到底走到哪一步了？\n如果把商业化看成闯关，智谱过了第一关，后面三关还没有答案。\n第一关是需求。API收入快速增长，说明市场确实有人愿意为模型能力付费。这一关已经有了正面证据。\n第二关是留存。",
+    "author": {
+      "name": "天眼查",
+      "badge": "知势榜经济与管理领域影响力榜上榜答主",
+      "avatar": "/avatars/6436b3cb73ea.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 3,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-3257040574507282123",
+    "title": "【从零手搓大模型】S06大模型概述E01大模型最基本的背景概念",
+    "url": "https://zhuanlan.zhihu.com/p/2074531945405592302?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "大模型是深度学习的极致延伸\nopenAI推出的ChatGPT大语言模型作为深度学习网络模型的又一次深化设计的代表，为自然语言处理领域带来了革命的变化。\n我们知道，在大语言模型出现之前，传统方法（比如手工规则或者简单模型）可以较好的处理垃圾邮件检测、简单模式识别等分类任务。但是一旦涉及到对于语义的复杂理解和生成能力的语言任务时，比方说：解析详细的指令、进行语境分析、进行文本的原创等等，通常都表现不佳。\n而大语言模型在理解、生成和理解人类语言方面拥有出色的能力。但是在进入大模型内核之前，你就需要明白一个问题，就是大语言模型的“理解”能力，实际上是指他们能够处理和生成看似连贯而且符合语境、语义的文本，而并不是说他真的能拥有人类一样的意识和理解能力。\n深度学习是机器学习和人工智能领域的一个重要分支，主要聚焦神经网络的研究。深度学习的发展使得大语言模型能够利用海量的文本数据进行训练，从而相比于以往任何方法都能更好的捕捉更深层次的上下文信息和人类语言的细微之处。神经网络+大数据这个技术底座，使得文本翻译、情感分析、问答等各类自然语言处理任务中，都获得了显著的性能提升。因此大语言模型在各类自然语言处理任务中展现了广泛而强大的能力。\n大模型成功的精髓在于足够大和transformer架构\n大语言模型能取得成功的核心精髓是什么，一方面得益于为其提供支撑的Transformer架构，另一方面得益于用于训练这些模型的海量数据。这使得他们能够捕捉到语言中的各类细微差异、上下文信息和模式规律，这些都是原来基于手动编码、总结规律所能以实现的。因此这种基于Transformer架构并利用大型数据集来训练大语言模型的转变，已经从根本上变革了自然语言处理领域，为机器理解并与人类互动提供了强大的工具。\n因此，大语言模型中的大字，就很能说明问题。“大”一方面代表了模型训练时所依赖的庞大数据集，也反映了模型本身所拥有的数百亿和数千亿的参数规模。\n实际上，大模型的训练实际上也是参数不断优化的过程，他的庞大参数集就是这个巨大神经网络的可调整权重，在训练过程中不断地被优化，以预测文本序列中的下一个词。",
+    "author": {
+      "name": "石溪",
+      "badge": "数学话题下的优秀答主",
+      "avatar": "/avatars/157d7a3949b5.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 0,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-5963132033897930173",
+    "title": "现在AI大模型很火,对普通人而言到底有哪些具体的实用价值?",
+    "url": "https://www.zhihu.com/question/2078386768685031509/answer/2078616551696216326?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Answer",
+    "excerpt": "这条链之所以重要，是因为依赖基本是单向的。不理解注意力为什么能复用历史 K/V，就很难理解推理阶段为什么存在缓存；不知道预训练优化的是 next-token loss，也很难说清基础模型为什么不天然等于可靠的聊天助手。\n对非技术学习同样如此。让模型先画知识地图，再做入门解释，随后出题、批改并针对错题重讲，比让它直接生成一篇“大而全教程”更有效。你需要的不是一次性答案，而是反馈循环。\n第四类价值：把重复脑力劳动变成半自动工作流\n当任务同时满足“高频、规则相对稳定、错误可以复核”时，大模型的收益最明显，例如邮件分类、表格字段提取、客服回复初稿、内容改写和常见问题整理。\n进一步接入个人资料与外部工具后，它可以从“回答问题”走向“协助完成任务”。但这已经涉及《大模型保姆级指南》第 6 章讨论的 RAG 与 Agent：简单说，前者让模型参考指定资料，后者让模型在受控范围内调用工具。为什么重要？因为仅靠模型参数中的旧知识，无法可靠处理你的私有文件和实时状态。\n这里只需要记住一个原则：自动化程度越高，权限和风险也越高。读取日历和真正删除日程，不是同一级别的能力；生成付款申请和实际付款，更不能使用同一套授权边界。\n哪些事情不适合直接交给大模型？\n可以用两个问题筛选：\n1.输出错了，能不能较容易地发现？\n2.输出错了，代价是否可逆？\n如果答案是“难发现且代价高”，就不应该让模型独立决策。医疗诊断、法律结论、投资操作、正式合同、账号权限变更，都应由相应专业人士或责任人复核。涉及个人身份信息、商业机密和未公开数据时，还要先确认使用的产品是否允许上传，以及数据如何存储。\n图2给出了一个实用分流：低风险、易核验的任务可以直接借助模型提效；高风险任务只能让它整理材料、生成问题清单或提供候选方案，最后决定权必须留在人手里。\n归根结底，大模型不是“普通人的全能替身”，而是一种新的通用接口：它把阅读、表达、学习和部分软件操作压缩到自然语言里。\n最好的用法是让它负责搜索候选、重组信息和生成初稿，人负责提供事实、设定边界、核验结果并承担决定。\n关于这条从模型原理到实际应用的完整链路，《大模型保姆级指南》在  www.llmbases.com 按章节持续整理；我也在小红书【llmbases】同步更新，关注后私信『资源』可领《大模型资源汇总》PDF。\n觉得有帮助的话，欢迎点赞收藏，让更多同学看到。\n图2给出了一个实用分流：低风险、易核验的任务可以直接借助模型提效；高风险任务只能让它整理材料、生成问题清单或提供候选方案，最后决定权必须留在人手里。",
+    "author": {
+      "name": "llmbases",
+      "badge": "天津大学 电子信息硕士",
+      "avatar": "/avatars/f104e5c33307.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 0,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-8850681484739548333",
+    "title": "再遇Python装饰器:从@timer到 AOP 容器,手写两个装饰器,让你学校的Python课当场失业",
+    "url": "https://zhuanlan.zhihu.com/p/2077688378007482510?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "一、学校教的 @timer：玩具装饰器\n你的 Python 课教你装饰器的时候，99% 是这么教的：\n这就是学校教你的装饰器：打印函数执行时间。 然后考试问“装饰器的执行顺序是什么”，背了一堆 @decorator1 @decorator2 谁先执行，考完忘光。\n恭喜，你学了个玩具。 🥰\n装饰器真正的作用不是“打印执行时间”，而是AOP（面向切面编程）——在不修改原函数的情况下，给它添加额外的行为。\n二、AOP 是啥？\n假设你有 10 个业务方法，都需要：\n1.检查当前用户是否登录\n2.记录操作日志\n3.异常时发邮件通知\n不用 AOP 的话，你得把这 3 件事写进 10 个方法里。 每个方法开头都是：\nAOP 的思想是：把这些“横切关注点”从业务逻辑里抽出来，用装饰器统一处理。 业务代码里只写业务，登录检查、日志记录、异常处理全部交给装饰器。\n现在业务方法干净了，只需要关注“怎么创建订单”，不需要管“怎么检查登录”。 这就是 AOP——把散落在 10 个方法里的横切逻辑，收拢到 10 个装饰器里。\n本文要实现两个 AOP 应用：\n1.自动注入当前用户 ID——业务方法声明需要 uid，代理自动从上下文里取，调用方不用传\n2.状态校验——用装饰器给方法打标签，代理在调用前检查用户状态是否合法\n三、第一个 AOP：自动注入当前用户 ID\n3.1 问题场景\n你的业务方法需要知道“当前是谁在操作”，正常写法：\n问题：uid 每次都要手动传。10 个方法传 10 次，100 个方法传 100 次。而且“当前用户”这个概念和业务逻辑无关——它是上下文。\n3.2 用 ContextVar 管理上下文\n为什么用 ContextVar 而不是全局变量？ 因为全局变量在异步并发时会串——协程 A 设置 uid=1，协程 B 设置 uid=2，协程 A 读到的就是 2。ContextVar 是”协程局部”的，每个协程有自己独立的值，互不污染。\n3.3 写一个代理类\n当外部访问 service.user_service.update_user_name 时，__getattr__ 被触发，检查这个方法需要不需要 uid，需要就从 ContextVar 取，用 partial 绑定，返回。外部感知不到代理的存在，只知道自己能直接调 update_user_name(name=...) 不用传 uid。\nparam.annotation in (int | None, \"int | None\") 等是为了防止 from __future__ import annotations 导致int | None 未命中 ",
+    "author": {
+      "name": "塑梦",
+      "badge": "",
+      "avatar": "/avatars/9a765a11a1a0.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 7,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "7090539717686724945",
+    "title": "Python 装饰器,人剑要合一",
+    "url": "https://zhuanlan.zhihu.com/p/2070484071294281261?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "这里 retry(max_attempts, delay) 返回 decorator，decorator 才是真正的装饰器。记住：带参数的装饰器本质就是“装饰器工厂”，多一层函数调用。\n七、多个装饰器的叠加与顺序\n一个函数可以应用多个装饰器，它们会自下而上地执行包装。离函数最近的装饰器先包装，然后依次向外。\n执行流程：greeting 先被 upper_decorator 包装，结果变为大写；然后被 bold_decorator 包装，最终结果变成 <b>HELLO WORLD</b>。如果交换装饰器顺序，结果会不同，你可以自己试试。\n八、类装饰器\n装饰器不仅可以是函数，也可以是类。类装饰器依靠 __call__ 方法实现可调用对象。\n1. 无参类装饰器\n__init__ 接收被装饰的函数，__call__ 让实例本身可以像函数一样被调用。类装饰器便于保存状态，比如这里的调用计数。\n2. 带参数的类装饰器\n__init__ 接收装饰器参数，__call__ 接收函数并返回包装后的函数。理解这种模式后，你可以自由选择函数或类来实现装饰器。\n九、实战场景拓展\n场景一：性能计时器\n测量函数执行时间，用于性能分析。\n场景二：权限验证\n在 Web 开发中，可用装饰器检查用户是否登录或具有权限。\n场景三：缓存函数结果（备忘）\n避免重复计算，提高效率。\n场景四：单例模式\n利用类装饰器实现单例（也可用装饰器修饰类）。\n场景五：参数类型校验\n在函数调用时自动校验参数类型。\n十、装饰器与上下文管理、描述符的联动\n装饰器并不是孤立的，它经常和上下文管理器（with）、描述符等特性一起使用，构建更优雅的代码。\n例如用装饰器实现一个临时修改环境变量，执行后自动恢复的功能：\n这种组合让资源的准备和清理变得极其安全。\n十一、注意事项与最佳实践\n1.保持元信息：务必使用 @wraps(func)，便于调试和文档生成。\n2.不要滥用：装饰器会引入额外抽象，如果不是必要的横切关注点，直接用普通函数调用更清晰。\n3.注意参数传递：设计通用装饰器时永远使用 *args, **kwargs，避免限制被装饰函数的签名。\n4.装饰器顺序：多个装饰器叠加时注意执行顺序（外层的先执行，内层的先包装）。\n5.调试支持：Python 3.10+ 可以使用 functools.update_wrapper 或 wraps 保留更好的内省信息，functools.cache 等内置装饰器也可以直接使用，无需自己实现缓存。\n6.类型提示：如果你使用类型检查，可以用 Callable、泛型等为装饰器标注类型，提高代码可读性。",
+    "author": {
+      "name": "码刀攻城",
+      "badge": "",
+      "avatar": "/avatars/b81353fb22e3.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 1,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "7888223656081235216",
+    "title": "Python的进阶学习【五】",
+    "url": "https://zhuanlan.zhihu.com/p/2047418903484175171?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "你能试着照猫画虎，把这个 auth_decorator 写出来吗？（同样要支持万能参数哦！）\n问题：def auth_decorator(func):def wrapper(*args, **kwargs): func(*args, **kwargs)return rapper\n非常棒！你已经完全掌握了万能参数 *args 和 kwargs 的打包与解包写法。这个架子搭得极其标准！\n现在，这行代码已经是一个完美的复读机了（它接收什么函数和参数，就原封不动地执行什么函数和参数）。\n我们只需要在这个架子里，把新需求——“在执行业务之前，先打印一句正在验证用户权限...” 加进去，这个装饰器就大功告成了。\n你看，是不是只要在 func 执行的前面，加上一行 print 就可以了：\n🎉 测试一下我们的成果\n现在我们来测试一下你亲手写出的第一个实用装饰器：\n屏幕上将会打印出：\n恭喜你！你已经成功翻过了 Python 进阶路上最难的装饰器大山。回看整个结构，它其实就是用一个万能的口袋函数（wrapper），把原本的函数（func）给包裹起来，在 func 的前后加上你想加的任何新代码。\n🚀 装饰器的终极完整形态：顺手牵羊拿走返回值\n到这里你已经掌握了 90% 的装饰器知识。最后还剩一个极小的细节——返回值。\n如果我们的核心函数不仅有参数，还有返回值（比如 return 了一个结果），目前我们的 wrapper 里面只是执行了 func(*args, kwargs)，并没有把它的返回值接住并丢出去。\n为了让装饰器彻底无懈可击，我们只需要在 wrapper 内部用一个变量接住业务函数的返回值，并在最后把它 return 出来：\n这就是你在实际生产环境中，见到的最标准的 Python 装饰器模板。有了这个模板，你可以去写日志记录器、权限校验器、缓存加速器等等任何炫酷的功能了。\n今天连续高强度地攻克了推导式、生成器、Lambda、万能参数、装饰器，信息量非常大，但你完成得漂亮极了！\n对于今天的内容，你觉得哪一部分对你来说最妙，或者还有哪里觉得有一点点绕？我们可以做个总结，或者你准备好下节课去解锁 Python 的类与面向对象（OOP）了吗？\n问题：感觉对装饰器还是有些迷惑，可以再详细讲解下或者举例么\n完全理解。\n装饰器之所以让人迷惑，是因为它像一个“隐形斗篷”——你表面上调用的是函数 A，但背地里执行的却是包裹着 A 的函数 B。",
+    "author": {
+      "name": "云深无迹",
+      "badge": "",
+      "avatar": "/avatars/f6177d192792.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 10,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "4660109950064738913",
+    "title": "还在傻傻理解不了python装饰器的用法和原理?一文讲明白什么是装饰器!",
+    "url": "https://zhuanlan.zhihu.com/p/2051839136613544611?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "在使用Python 装饰器的时候，我们很容易陷入Python 装饰器一个很常见的“认知陷阱”问题：\n到底什么时候是“定义”装饰器，什么时候是“使用”装饰器？今天一文来给大家讲明白装饰器！\n一、装饰器是什么？\n一句话定义:“定义是造装饰器；使用是套在函数上那一刻；调用是执行被包装后的函数。”\n在 Python 中，装饰器本质上就是一个“接收函数并返回新函数的函数”。\n例如：\ndef decorator(func):\n    print(\"装饰器被定义时执行\")\n    def wrapper(*args, **kwargs):\n        print(\"函数被调用时执行\")\n        return func(*args, **kwargs)\n    return wrapper\n当我们写：\n@decorator\ndef say_hello():\n    print(\"hello\")\nPython 在加载这段代码时，会立刻执行 decorator(say_hello)，\n并把返回的新函数（wrapper）绑定回原名 say_hello。\n二、定义 vs 使用\n阶段\t名称\t时机\t发生了什么\n①\t定义装饰器\t定义 decorator() 函数时\t只是创建了一个函数对象，还没用到它\n②\t使用装饰器\t写 @decorator 时\t解释器会调用 decorator(被装饰函数)，返回值替代原函数\n③\t运行被装饰函数\t调用 say_hello() 时\t实际调用的是 wrapper()，执行装饰逻辑后再执行原函数\n🔍 三、可打印示例",
+    "author": {
+      "name": "JH-gh07",
+      "badge": "",
+      "avatar": "/avatars/1ab3b48f7961.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 1,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-7095781569640354387",
+    "title": "Python---装饰器",
+    "url": "https://zhuanlan.zhihu.com/p/1916516210192941187?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "装饰器(Decorators)是 Python 的一个重要部分。简单地说：他们是修改其他函数的功能的函数。\neg\ndef a_new_decorator(a_func):\n \n    def wrapTheFunction():\n        print(\"I am doing some boring work before executing a_func()\")\n \n        a_func()\n \n        print(\"I am doing some boring work after executing a_func()\")\n \n    return wrapTheFunction\n \ndef a_function_requiring_decoration():\n    print(\"I am the function which needs some decoration to remove my foul smell\")\n \na_function_requiring_decoration()\n#outputs: \"I am the function which needs some decoration to remove my foul smell\"\n \na_function_requiring_decoration = a_new_decorator(a_function_requiring_decoration)\n#now a_function_requiring_decoration is wrapped by wrapTheFunction()\n \na_function_requiring_decoration()\n#outputs:I am doing some boring work before executing a_func()\n#        I am the function which needs some decoration to remove my foul smell\n#        I am doing some boring work after executing a_func()\n上面代码中将defa_function_requiring_decoration():函数传入a_new_decorator函数，注意a_function_requiring_decoration 现在是一个函数，如果直接print(a_function_requiring_decoration )则会显示为一个函数首地址，只有a_function_requiring_decoration()加上括号后会执行这个函数。",
+    "author": {
+      "name": "控制工程老学长",
+      "badge": "",
+      "avatar": "/avatars/ec13057cd5f8.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 1,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-1300842382604668734",
+    "title": "Python 装饰器新手入门与实战指南",
+    "url": "https://zhuanlan.zhihu.com/p/2065442183109465120?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "from functools import wraps\nimport time\n\ndef retry(max_attempts=3, delay=1):\n    def decorator(func):\n        @wraps(func)\n        def wrapper(*args, **kwargs):\n            for attempt in range(1, max_attempts + 1):\n                try:\n                    return func(*args, **kwargs)\n                except Exception as e:\n                    if attempt == max_attempts:\n                        raise\n                    print(f\"第{attempt}次失败，{delay}秒后重试...\")\n                    time.sleep(delay)\n        return wrapper\n    return decorator\n\n@retry(max_attempts=3, delay=0.5)\ndef unstable_request():\n    import random\n    if random.random() < 0.7:\n        raise ValueError(\"请求失败\")\n    return \"成功！\"\n⑩ 常见缩进错误与调用异常排查\n错误1：忘记返回 wrapper\ndef bad_decorator(func):\n    def wrapper():\n        func()\n    # 忘记 return wrapper——返回 None！\n\n@bad_decorator\ndef hello():\n    print(\"Hello\")\n\nhello()  # TypeError: 'NoneType' object is not callable\n解决方法：始终确保装饰器返回 wrapper 函数。\n错误2：忘记传递 *args 和 **kwargs",
+    "author": {
+      "name": "来取故事",
+      "badge": "",
+      "avatar": "/avatars/64013220b684.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 3,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-7893520508590567594",
+    "title": "Python基础轻松学第三十四章:装饰器",
+    "url": "https://zhuanlan.zhihu.com/p/2013570383350113911?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "def log_decorator(func):  # 定义装饰器，高阶函数描\n    \"\"\"装饰器函数外部\"\"\"\n    def wrapper(*args, **kwargs):  # 定义内部函数（包装函数），接收任意参数\n        \"\"\"装饰器函数内部\"\"\"\n        print(f\"[日志] 函数 {func.__name__} 开始执行\")  # 调用add函数时，输出：[日志] 函数 add 开始执行\n        result = func(*args, **kwargs)  # 执行原函数并保存返回值\n        print(f\"[日志] 函数 {func.__name__} 执行完成\")  # 调用add函数时，输出：[日志] 函数 add 执行完成\n        return result   # 返回原函数的返回值，保证装饰后功能不变\n    return wrapper  # 返回包装后的函数\n\n\n@log_decorator  # 使用装饰器语法糖@\ndef add(a, b):\n    \"\"\"计算两个数的和\"\"\"\n    return a + b\n\n\nprint(add(2, 3))  # 调用装饰后的函数，调用方式和原函数完全一致，输出：5\nprint(add.__doc__)   # 输出：装饰器函数内部\n・2. 装饰器的坑1)上面代码中@log_decorator等价于add = log_decorator(add)，是Python的语法糖2)上面代码中wrapper(*args, **kwargs)接收任意参数，保证装饰器适配所有函数3)必须返回原函数的执行结果result，否则装饰后的函数会丢失返回值。4)上面的装饰器有个问题：装饰后的函数元信息（如函数名、文档字符串）会被wrapper覆盖，观察print(add.__doc__)   # 输出：装饰器函数内部5)下面代码修改后参考结果6)备注元信息是什么？描述对象函数，类，模块等本身附加信息。比如函数的名字，文档说明，创建时间，所属模块等这些信息不影响对象的核心功能，但能让我们了解对象的身份和属性，如下面的__name__，__doc__\nimport functools\n\n\ndef log_decorator(func):\n    @functools.wraps(func)  # 保留原函数的元信息\n",
+    "author": {
+      "name": "足球猪猪侠",
+      "badge": "",
+      "avatar": "/avatars/ff2869baa3aa.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 2,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "1976771850442895943",
+    "title": "Python手把手练习12--函数及其应用",
+    "url": "https://zhuanlan.zhihu.com/p/1992946970248115450?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "通过闭包操作内层函数可记住外层函数的变量状态，实现状态的持久化（无需使用全局变量）；同时将核心逻辑与状态变量封装在一起，提高代码的模块化和安全性。适用于需要保存状态的场景，如计数器、配置固定参数的工具函数、装饰器底层实现等。需要注意的是外层函数必须返回内层函数（函数对象，不带括号）；内层函数必须引用外层函数的局部变量（否则不构成闭包）；闭包会延长外层函数局部变量的生命周期，避免被垃圾回收。\n# 外层函数：接收初始值x（状态变量）\ndef outer(x):\n    # 内层函数：使用外层变量x\n    def inner(y):\n        return x + y  # 引用外层变量x，形成闭包\n    return inner  # 返回内层函数（函数对象）\n\n# 创建闭包f，记住x=5的状态\nf = outer(5)\nprint(f(3))  # 输出：8（x=5 + y=3）\nprint(f(4))  # 输出：9（x仍为5 + y=4，状态被保留）\n\n# 创建另一个闭包g，记住x=10的状态\ng = outer(10)\nprint(g(3))  # 输出：13（x=10 + y=3，与f的状态独立）\n5.4.4 装饰器基础（@语法）\n装饰器是一种特殊的高阶函数，接收原函数作为参数，返回一个包装后的新函数，通过@语法（语法糖）简化装饰器的使用。装饰器基于闭包实现，本质是一个“包装器函数”，在不修改原函数代码和调用方式的前提下，为原函数添加额外功能（如日志记录、计时、权限验证等），核心是“函数包装+功能增强”。其基本语法格式为：\n»#定义装饰器（闭包结构）：\n»def 装饰器名(func):\n» def 包装函数():\n» # 函数执行前的额外功能\n» func() # 调用原函数\n» # 函数执行后的额外功能\n»return 包装函数\n» #使用@语法装饰原函数\n»@装饰器名\n»def 原函数():\n» 原函数体\n该方法适用于各类功能增强场景，如日志记录（记录函数调用时间、参数）、性能计时（统计函数执行耗时）、权限验证（验证用户是否有权调用函数）等。\n需要注意的是@语法是装饰器的简化写法，等价于“原函数 = 装饰器名(原函数)”；装饰器会替换原函数的引用，若需保留原函数的元信息（如函数名、文档字符串），需使用functools.wraps装饰包装函数；装饰器可嵌套使用，执行顺序为“就近装饰器先执行”。",
+    "author": {
+      "name": "手把手教Python",
+      "badge": "",
+      "avatar": "/avatars/20003a34c47b.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 13,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-7595226990774815201",
+    "title": "十一、Python基础学习-闭包、装饰器",
+    "url": "https://zhuanlan.zhihu.com/p/1935367832293601798?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "・导入wraps工具，作用：保留原函数的名字、注释等原生信息\n・不加这个，后续函数名会被包装函数顶替，开发里规范写法必加.\n去掉 @wraps(func) 直观后果\n结论：函数的名字、文档注释、元信息都会被内层包装函数覆盖，丢失原函数标识，调试、日志、反射都会出问题。\nfrom functools import wraps\n\ndef logger(func):\n    # 删掉这一行：@wraps(func)\n    def inner(*args, **kwargs):\n        print(f\"开始调用函数：{func.__name__}\")\n        res = func(*args, **kwargs)\n        print(\"函数调用结束\")\n        return res\n    return inner\n\n@logger\ndef add(a, b):\n    \"\"\"两数相加函数\"\"\"\n    return a + b\n\n# 打印函数名称、文档注释\nprint(\"函数名：\", add.__name__)\nprint(\"函数注释：\", add.__doc__)\n加上 @wraps(func) 后正常输出：\n・小脚本单纯跑逻辑，删了也能正常运算，加法结果不会错；\n・正式项目、需要调试、日志、报错溯源、反射，必须加 @wraps(func)；\n例3：\nimport time\nfrom functools import wraps\n\ndef time_cost(func):\n    @wraps(func)\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        ret = func(*args, **kwargs)\n        end = time.time()\n        print(f\"{func.__name__} 耗时：{end - start:.4f}s\")\n        return ret\n    return wrapper\n\n@time_cost\ndef calc():\n    s = 0\n    for i in range(1000000):\n        s += i\n    return s\n\ncalc()\n5、多个装饰器\n#第一个装饰器\n",
+    "author": {
+      "name": "Jaron Niu",
+      "badge": "同济大学 建筑与土木工程硕士",
+      "avatar": "/avatars/c22eac40996b.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 5,
+      "comments": 0,
+      "year": 2026
+    },
+    "domain": "",
+    "reason": ""
+  },
+  {
+    "id": "-2767610940899516730",
+    "title": "Python学习第二课(第4节:装饰器)",
+    "url": "https://zhuanlan.zhihu.com/p/1989008163337438237?utm_medium=openapi_platform&utm_source=cf621feb3f2d",
+    "contentType": "Article",
+    "excerpt": "上一节： Python学习第二课（第3节：内置函数和偏函数）\nPython 中的装饰器\n装饰器是 Python 里很复杂的高级功能，说句心里话，我对 Python 装饰器的掌握程度也还没有达到能给大家讲透的地步（因为我自己也还没吃透），所以本节课的部分代码是来自网上的教学内容，还需要大家在编程实战中不断去体会。\n一、什么是装饰器？\n先来看看关于装饰器比较正式的介绍：\n装饰器（Decorator）是一种 Python 的高级功能（也是一种设计模式），允许在不修改原函数代码的情况下，动态地为函数或类添加额外的功能，如性能计时、日志记录、权限检查、缓存等，其本质是一个接受函数/类并返回新函数/类的函数/类，使用@符号作为语法糖。它通过闭包（下文会介绍）实现，提供了一种优雅且可重用的方式来处理横切关注点（面向切片编程的实现）。\n需要说明一点，Python 中有两种装饰器，一种是类装饰器，一种是函数装饰器。由于类装饰器我在使用 Python 编程的过程中很少用到，所以本节课里提到的装饰器若未特殊说明就是指函数装饰器，类装饰器则在未来的某节课里会提到。\n首先，我们思考一个场景，比如你在做代码的性能优化时，需要测试一个函数 f 运行的时间，你会怎么写？\n是不是长下面这样：\nimport time\n\n\ndef f():\n    t1 = time.time()\n    '''\n    # long call function code\n    '''\n    t2 = time.time()\n    print('函数 f 耗时：', t2 - t1)\n\n\nf()\n这样写当然没问题！但如果你第项目中有很多函数需要进行性能测试并进行优化，那你是不是需要在每个函数内部开头和结尾都加上上面的两行计时统计代码？然后，当代码优化完成后，又要注释或删掉这些代码？\n这样操作是不是光想着就感觉很麻烦？\n是的，正是因为有这样的需求，装饰器应运而生！只需要在函数的前一行加上@标记，就表示先运行这个装饰器函数，然后再运行被装饰的原函数，正如下面的一段代码所示：\n@timer_deco\ndef f():\n    ...\n\nf()\n下面是这个计时装饰器的实现和调用示例：\nimport time\nimport functools\n\n\n# 定义一个计时装饰器\ndef timer_deco(func):\n    @functools.wraps(func)  # 保留原函数的元信息（如 __name__, __doc__）\n",
+    "author": {
+      "name": "CMOS三好先生",
+      "badge": "",
+      "avatar": "/avatars/3168b118a0bb.jpg"
+    },
+    "comments": [],
+    "stats": {
+      "votes": 5,
+      "comments": 0,
+      "year": 2025
+    },
+    "domain": "",
+    "reason": ""
+  }
+]
