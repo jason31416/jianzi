@@ -4,19 +4,31 @@
  *
  * Usage: node scripts/build-pool.mjs [inputDir]   (default ../pool-raw)
  *
- * Two stages, and only the first one is free.
+ * Three layers, and only the last one costs anything.
  *
  *   1. Harvest gate — deterministic. Keep an item only when it is a zhihu.com
  *      page, carries a real timestamp, and has an author name that is not the
  *      anonymous placeholder. The deck cannot deliver "看见一个人" without a name,
  *      and roughly a third of raw items have none.
- *   2. Scoring — needs a model. Every surviving card is scored on the three
- *      questions from DESIGN.md section 9.5 (human voice, still true in three
- *      years, readable by an outsider, something to take away). This stage costs
- *      money, needs network, and is not reproducible run to run, so its output is
- *      cached in content/scores.json keyed by card id together with the model
- *      name and a hash of the prompt. Re-running the harvest never re-scores a
- *      card that already has a score.
+ *   2. Text features — deterministic, offline (scripts/lib/text-features.mjs).
+ *      Counts the marks of hand-written Chinese: first-person narration, named
+ *      relatives, concrete dates and amounts, dialogue, asides, self-correction,
+ *      against the marks of machine prose: scaffold words, list numbering,
+ *      buzzwords, news and tutorial register. Always on, because it is the only
+ *      filter that exists when no model is configured, and because a model
+ *      under-rates human-ness that lives in form rather than meaning.
+ *   3. Scoring — needs a model. Every surviving card answers the three questions
+ *      from DESIGN.md section 9.5 (human voice, still true in three years,
+ *      readable by an outsider, something to take away). Costs money, needs
+ *      network, and is not reproducible run to run, so its output is cached in
+ *      content/scores.json keyed by card id together with the model name and a
+ *      hash of the prompt. Re-running the harvest never re-scores a card that
+ *      already has a score.
+ *
+ * The final human score is 0.65 * model + 0.35 * features. A card the model
+ * rejects outright (below 4) can be lifted by at most one point by its surface
+ * features — first-person markers are trivially imitable by exactly the content
+ * the model saw through.
  *
  * Credentials come from the environment, never from a file in the repo:
  *
@@ -39,6 +51,7 @@
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import path from 'node:path'
+import { extractFeatures, combineHuman } from './lib/text-features.mjs'
 
 const DEFAULT_AVATAR = 'da8e974dc' // Zhihu's anonymous placeholder
 const inputDir = process.argv[2] ?? path.join(import.meta.dirname, '..', '..', 'pool-raw')
@@ -160,7 +173,7 @@ for (const f of files) {
 await mkdir(avatarDir, { recursive: true })
 const seenIds = new Set()
 const cards = []
-const dropped = { duplicate: 0, notZhihu: 0, noTimestamp: 0, anonymous: 0 }
+const dropped = { duplicate: 0, notZhihu: 0, noTimestamp: 0, anonymous: 0, tooShort: 0, codeDominant: 0 }
 
 for (const it of items) {
   if (seenIds.has(it.ContentID)) {
@@ -182,6 +195,20 @@ for (const it of items) {
     continue
   }
 
+  // Layer two: text features. Free, deterministic, always on — it is the only
+  // filter available when no model is configured.
+  const title = cleanTitle(it.Title ?? '')
+  const excerpt = it.ContentText ?? ''
+  const features = extractFeatures(title, excerpt)
+  if (features.hardDrop === 'too-short') {
+    dropped.tooShort++
+    continue
+  }
+  if (features.hardDrop === 'code-dominant') {
+    dropped.codeDominant++
+    continue
+  }
+
   let avatar = ''
   try {
     avatar = await saveAvatar(it.AuthorAvatar)
@@ -191,10 +218,10 @@ for (const it of items) {
 
   cards.push({
     id: it.ContentID,
-    title: cleanTitle(it.Title ?? ''),
+    title,
     url: it.Url ?? '',
     contentType: it.ContentType === 'Article' ? 'Article' : 'Answer',
-    excerpt: it.ContentText ?? '',
+    excerpt,
     author: { name: it.AuthorName, badge: it.AuthorBadgeText ?? '', avatar },
     comments: (it.CommentInfoList ?? []).map((c) => c.Content).filter(Boolean),
     stats: {
@@ -204,6 +231,7 @@ for (const it of items) {
     },
     domain: '',
     reason: '',
+    _features: features,
   })
 }
 
@@ -213,7 +241,11 @@ const prompt = await readFile(promptFile, 'utf8')
 const promptHash = createHash('sha1').update(prompt).digest('hex').slice(0, 12)
 let scores = {}
 try {
-  scores = JSON.parse(await readFile(scoreFile, 'utf8')).scores ?? {}
+  const cached = JSON.parse(await readFile(scoreFile, 'utf8'))
+  for (const [id, entry] of Object.entries(cached.scores ?? {})) {
+    // v1 stored the model scores at the top level of the entry.
+    scores[id] = entry.llm || typeof entry.human === 'number' ? { llm: entry.llm ?? entry, features: entry.features ?? null } : entry
+  }
 } catch {
   /* first run */
 }
@@ -223,38 +255,63 @@ let scored = 0
 let kept = cards
 
 if (canScore) {
-  const stale = cards.filter((c) => scores[c.id]?.promptHash !== promptHash || scores[c.id]?.model !== LLM_MODEL)
+  const stale = cards.filter((c) => scores[c.id]?.llm?.promptHash !== promptHash || scores[c.id]?.llm?.model !== LLM_MODEL)
   console.log(`scoring ${stale.length} of ${cards.length} cards with ${LLM_MODEL} (${stale.length ? promptHash : 'all cached'})`)
   const results = await mapLimit(stale, 4, (card) => scoreOne(prompt, card))
   results.forEach((r, i) => {
     const card = stale[i]
     if (!r) return
-    scores[card.id] = { ...r, model: LLM_MODEL, promptHash, scoredAt: new Date().toISOString() }
+    scores[card.id] = {
+      ...(scores[card.id] ?? {}),
+      llm: { ...r, model: LLM_MODEL, promptHash, scoredAt: new Date().toISOString() },
+    }
     scored++
   })
-  await writeFile(scoreFile, JSON.stringify({ model: LLM_MODEL, promptHash, scores }, null, 2) + '\n')
+}
 
-  if (!POOL_KEEP_ALL) {
-    const minHuman = Number(POOL_MIN_HUMAN)
-    const minAccessible = Number(POOL_MIN_ACCESSIBLE)
-    const minTakeaway = Number(POOL_MIN_TAKEAWAY)
-    const before = cards.length
-    kept = cards.filter((c) => {
-      const s = scores[c.id]
-      if (!s) return true // unscored: no evidence against it, keep it
-      return s.human >= minHuman && s.accessible >= minAccessible && s.takeaway >= minTakeaway
-    })
-    console.log(`score filter (human>=${minHuman}, accessible>=${minAccessible}, takeaway>=${minTakeaway}): ${before - kept.length} dropped`)
+// Text features are recomputed every run, so they are written back per card
+// whether or not the model was called.
+for (const card of cards) {
+  const { _features, ..._rest } = card
+  scores[card.id] = { ...(scores[card.id] ?? {}), features: _features }
+  scores[card.id].final = {
+    human: combineHuman(scores[card.id].llm?.human, _features.ruleScore),
+    rule: _features.ruleScore,
+    llm: scores[card.id].llm?.human ?? null,
+    evergreen: scores[card.id].llm?.evergreen ?? null,
+    accessible: scores[card.id].llm?.accessible ?? null,
+    takeaway: scores[card.id].llm?.takeaway ?? null,
   }
-} else if (cards.length) {
-  console.warn('LLM_BASE_URL / LLM_API_KEY / LLM_MODEL not set — pool.json written unscored, no filtering')
+}
+if (cards.length) await writeFile(scoreFile, JSON.stringify({ version: 2, model: LLM_MODEL ?? null, promptHash, scores }, null, 2) + '\n')
+
+if (!POOL_KEEP_ALL) {
+  const minHuman = Number(POOL_MIN_HUMAN)
+  const minAccessible = Number(POOL_MIN_ACCESSIBLE)
+  const minTakeaway = Number(POOL_MIN_TAKEAWAY)
+  const before = cards.length
+  kept = cards.filter((c) => {
+    const f = scores[c.id].final
+    if (f.human < minHuman) return false
+    if (!canScore) return true // no model: the three questions are unmeasured, judge on human voice alone
+    return f.accessible >= minAccessible && f.takeaway >= minTakeaway
+  })
+  console.log(
+    canScore
+      ? `filter (human>=${minHuman}, accessible>=${minAccessible}, takeaway>=${minTakeaway}): ${before - kept.length} dropped; human = 0.65*model + 0.35*features`
+      : `filter (rule-only, human>=${minHuman}): ${before - kept.length} dropped; no model configured, so accessible/takeaway are not applied`,
+  )
+} else {
+  console.warn('POOL_KEEP_ALL=1 — scoring and features still run, nothing is filtered out')
 }
 
 await mkdir(path.dirname(outFile), { recursive: true })
-await writeFile(outFile, JSON.stringify(kept, null, 2) + '\n')
+await writeFile(outFile, JSON.stringify(kept.map(({ _features, ...card }) => card), null, 2) + '\n')
 
 console.log(`read    ${items.length} raw items from ${files.length} seed files`)
-console.log(`dropped ${dropped.duplicate} duplicate, ${dropped.notZhihu} non-zhihu, ${dropped.noTimestamp} undated, ${dropped.anonymous} anonymous`)
+console.log(
+  `dropped ${dropped.duplicate} duplicate, ${dropped.notZhihu} non-zhihu, ${dropped.noTimestamp} undated, ${dropped.anonymous} anonymous, ${dropped.tooShort} too-short, ${dropped.codeDominant} code-dominant`,
+)
 console.log(`gated   ${cards.length} cards, ${scored} newly scored`)
 console.log(`wrote   ${kept.length} cards to content/pool.json`)
 console.log(`pending ${kept.length} cards still need domain + reason`)
