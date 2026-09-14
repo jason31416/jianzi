@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check:features": "node scripts/check-features.mjs"
+    "check:features": "node scripts/check-features.mjs",
+    "check": "node scripts/check-features.mjs && node scripts/check-scoring.mjs",
+    "check:scoring": "node scripts/check-scoring.mjs"
   },
   "dependencies": {
     "next": "16.3.5",

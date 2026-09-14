@@ -19,13 +19,15 @@
  *      under-rates human-ness that lives in form rather than meaning. It drops
  *      nothing: a short or code-heavy excerpt is marked unmeasurable and passed
  *      on to the model, or kept when there is no model.
- *   3. Scoring — needs a model. Every surviving card answers the three questions
- *      from DESIGN.md section 9.5 (human voice, still true in three years,
- *      readable by an outsider, something to take away). Costs money, needs
- *      network, and is not reproducible run to run, so its output is cached in
- *      content/scores.json keyed by card id together with the model name and a
- *      hash of the prompt. Re-running the harvest never re-scores a card that
- *      already has a score.
+ *   3. Scoring — needs a model. Cards are sent LLM_BATCH_SIZE at a time and each
+ *      answers the three questions from DESIGN.md section 9.5 (human voice, still
+ *      true in three years, readable by an outsider, something to take away).
+ *      Batching is not only cheaper: scored side by side against two fixed
+ *      anchors in the prompt, the model keeps its scale instead of drifting with
+ *      whatever it saw last. Costs money, needs network, and is not reproducible
+ *      run to run, so its output is cached in content/scores.json keyed by card
+ *      id together with the model name and a hash of the prompt. Re-running the
+ *      harvest never re-scores a card that already has a score.
  *
  * The final human score is 0.65 * model + 0.35 * features. A card the model
  * rejects outright (below 4) can be lifted by at most one point by its surface
@@ -39,7 +41,9 @@
  *   LLM_MODEL      model id to send
  *
  * Optional, with defaults: POOL_MIN_HUMAN=6 POOL_MIN_ACCESSIBLE=6 POOL_MIN_TAKEAWAY=6
- * LLM_CONCURRENCY=4 (lower it for rate-limited or free endpoints) LLM_TIMEOUT_MS=60000
+ * LLM_BATCH_SIZE=6 cards per call, LLM_EXCERPT_CHARS=1200 per card,
+ * LLM_CONCURRENCY=4 calls at a time (lower it for rate-limited endpoints),
+ * LLM_TIMEOUT_MS=60000
  * Set POOL_KEEP_ALL=1 to score everything and keep every card regardless of score.
  *
  * Without LLM_BASE_URL / LLM_API_KEY the script still writes pool.json — the whole
@@ -55,6 +59,7 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import path from 'node:path'
 import { extractFeatures, combineHuman } from './lib/text-features.mjs'
+import { parseScores } from './lib/score-reply.mjs'
 
 const DEFAULT_AVATAR = 'da8e974dc' // Zhihu's anonymous placeholder
 const inputDir = process.argv[2] ?? path.join(import.meta.dirname, '..', '..', 'pool-raw')
@@ -67,8 +72,10 @@ const {
   LLM_BASE_URL,
   LLM_API_KEY,
   LLM_MODEL,
-  LLM_TIMEOUT_MS = '60000',
+  LLM_TIMEOUT_MS = '180000',
   LLM_CONCURRENCY = '4',
+  LLM_BATCH_SIZE = '6',
+  LLM_EXCERPT_CHARS = '1200',
   POOL_MIN_HUMAN = '6',
   POOL_MIN_ACCESSIBLE = '6',
   POOL_MIN_TAKEAWAY = '6',
@@ -119,14 +126,14 @@ async function mapLimit(items, limit, fn) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
-/** One scoring call. Returns null when the model refuses to give parseable JSON twice. */
-async function scoreOne(prompt, card) {
+/** One HTTP call. Returns the assistant text, or null when it fails twice. */
+async function callModel(prompt, userContent, what = '') {
   const body = {
     model: LLM_MODEL,
     temperature: 0,
     messages: [
       { role: 'system', content: prompt },
-      { role: 'user', content: `题目：${card.title}\n\n正文开头：\n${card.excerpt.slice(0, 2000)}` },
+      { role: 'user', content: userContent },
     ],
   }
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -142,22 +149,11 @@ async function scoreOne(prompt, card) {
       if (!res.ok) throw new Error(`http ${res.status}`)
       const json = await res.json()
       const text = json?.choices?.[0]?.message?.content ?? ''
-      const match = text.match(/\{[\s\S]*\}/)
-      if (!match) throw new Error('no json in reply')
-      const parsed = JSON.parse(match[0])
-      const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null)
-      const scores = {
-        human: num(parsed.human),
-        evergreen: num(parsed.evergreen),
-        accessible: num(parsed.accessible),
-        takeaway: num(parsed.takeaway),
-        note: typeof parsed.note === 'string' ? parsed.note.slice(0, 200) : '',
-      }
-      if (scores.human === null || scores.accessible === null || scores.takeaway === null) throw new Error('missing fields')
-      return scores
+      if (!text) throw new Error('empty reply')
+      return text
     } catch (err) {
       if (attempt === 1) {
-        console.warn(`  score failed for ${card.id}: ${err.message}`)
+        console.warn(`  call failed${what ? ` for ${what}` : ''}: ${err.message}`)
         return null
       }
       await sleep(1000)
@@ -167,6 +163,23 @@ async function scoreOne(prompt, card) {
   }
   return null
 }
+
+const renderBatch = (cards) =>
+  cards
+    .map((c) => `### id: ${c.id}\n标题：${c.title}\n\n正文开头：\n${c.excerpt.slice(0, Number(LLM_EXCERPT_CHARS))}`)
+    .join('\n\n---\n\n')
+
+/** Score one batch. Returns the parsed scores keyed by card id; ids may be missing. */
+async function scoreCards(prompt, cards) {
+  const text = await callModel(prompt, renderBatch(cards), cards.length === 1 ? cards[0].id : `${cards.length} cards`)
+  if (!text) return {}
+  const { scores, missing, unknown } = parseScores(text, cards.map((c) => c.id))
+  if (unknown.length) console.warn(`  reply carried ${unknown.length} unknown id(s)`)
+  if (missing.length) console.warn(`  reply missing ${missing.length}/${cards.length} id(s)`)
+  return scores
+}
+
+const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size))
 
 const files = (await readdir(inputDir)).filter(isSeedFile).sort()
 const items = []
@@ -276,22 +289,36 @@ for (const card of cards) {
 
 if (canScore) {
   const stale = cards.filter((c) => scores[c.id]?.llm?.promptHash !== promptHash || scores[c.id]?.llm?.model !== LLM_MODEL)
-  console.log(`scoring ${stale.length} of ${cards.length} cards with ${LLM_MODEL} at concurrency ${LLM_CONCURRENCY} (${stale.length ? promptHash : 'all cached'})`)
+  const batchSize = Math.max(1, Number(LLM_BATCH_SIZE))
+  const batches = chunk(stale, batchSize)
+  console.log(
+    `scoring ${stale.length} of ${cards.length} cards in ${batches.length} batches of ${batchSize}, ${LLM_CONCURRENCY} at a time, with ${LLM_MODEL} (${stale.length ? promptHash : 'all cached'})`,
+  )
   let done = 0
-  await mapLimit(stale, Math.max(1, Number(LLM_CONCURRENCY)), async (card) => {
-    const r = await scoreOne(prompt, card)
-    done++
-    if (r) {
-      scores[card.id] = { ...(scores[card.id] ?? {}), llm: { ...r, model: LLM_MODEL, promptHash, scoredAt: new Date().toISOString() } }
-      finalize(card)
-      scored++
+  await mapLimit(batches, Math.max(1, Number(LLM_CONCURRENCY)), async (batch) => {
+    const started = Date.now()
+    const got = await scoreCards(prompt, batch)
+    // A batch that comes back short is retried one card at a time: replies get
+    // truncated, and losing five good cards because one id is absent is worse
+    // than five extra calls.
+    const missing = batch.filter((c) => !got[c.id])
+    if (missing.length && batch.length > 1) {
+      console.log(`  batch short by ${missing.length}, retrying those alone`)
+      for (const card of missing) Object.assign(got, await scoreCards(prompt, [card]))
     }
-    // Persist as we go: a scored pool is expensive, a thirty-minute silent run
-    // that dies at minute twenty-nine is not worth the discount.
-    if (done % 10 === 0 || done === stale.length) {
-      await persist()
-      console.log(`  scored ${done}/${stale.length} (${scored} ok)`)
+    for (const card of batch) {
+      const r = got[card.id]
+      done++
+      if (r) {
+        scores[card.id] = { ...(scores[card.id] ?? {}), llm: { ...r, model: LLM_MODEL, promptHash, scoredAt: new Date().toISOString() } }
+        finalize(card)
+        scored++
+      }
     }
+    // Persist as we go: a scored pool is expensive, a half-hour silent run that
+    // dies at minute twenty-nine is not worth the discount.
+    await persist()
+    console.log(`  scored ${done}/${stale.length} (${scored} ok, last batch ${((Date.now() - started) / 1000).toFixed(1)}s)`)
   })
 }
 

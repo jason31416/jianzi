@@ -59,10 +59,13 @@ LLM_BASE_URL=https://api.example.com/v1 \
 LLM_API_KEY=... \
 LLM_MODEL=... \
 LLM_CONCURRENCY=2 \
+LLM_BATCH_SIZE=6 \
 node scripts/build-pool.mjs
 ```
 
-模型评分不是必跑项：不配 `LLM_BASE_URL` / `LLM_API_KEY` / `LLM_MODEL` 时脚本仍然产出完整的池子，只是不过滤。评分结果缓存在 `content/scores.json`，按卡片 id 存，改 prompt 或换模型会自动重评。
+模型评分不是必跑项：不配 `LLM_BASE_URL` / `LLM_API_KEY` / `LLM_MODEL` 时脚本仍然产出完整的池子，只按文本特征过滤。评分结果缓存在 `content/scores.json`，按卡片 id 存，改 prompt 或换模型会自动重评。
+
+评分按批进行，每次送 `LLM_BATCH_SIZE` 条（默认 6），每条正文截到 `LLM_EXCERPT_CHARS`（默认 1200）。批量不只是省钱：在提示词里放了一好一坏两条基准卡做刻度，模型一次看多条时尺度更稳。某一批少返回了 id，那几张会单独再问一次。单次调用超时默认 180 秒，免费端点上一条卡实测要 100 秒上下。
 
 ## 开发状态
 
